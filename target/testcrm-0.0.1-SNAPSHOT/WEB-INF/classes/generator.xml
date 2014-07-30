@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <classPathEntry location="F:/workspace/crm2011/WebRoot/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar" />
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+
+    <!-- 取消生成的代码注释 -->
+    <commentGenerator><property name="suppressAllComments" value="true" /></commentGenerator>
+
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://127.0.0.1:3306/crm2011"
+        userId="root"
+        password="20092009">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+	
+	<!-- javaModelGenerator是模型的生成信息，这里将指定这些Java model类的生成路径 -->
+	<javaModelGenerator targetPackage="com.huaxin.model"  
+            targetProject="F:/workspace/crm2011/src">  
+            <property name="enableSubPackages" value="true" />  
+            <property name="trimStrings" value="true" />  
+    </javaModelGenerator>  
+	
+    <sqlMapGenerator targetPackage="com.huaxin.mapper"  targetProject="F:/workspace/crm2011/src">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+	<!-- javaClientGenerator是应用接口的生成信息  -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.huaxin.mapper"  targetProject="F:/workspace/crm2011/src">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+    <table schema="crm2011" tableName="user_role" ></table>
+  </context>
+</generatorConfiguration>
+
+

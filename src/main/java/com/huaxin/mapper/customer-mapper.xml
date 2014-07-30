@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.huaxin.mapper.CustomerMapper">
+	
+	<!-- 最后的object的属性  -->
+	<resultMap type="customer" id="customerResult">
+		<id column="customer_id" property="customerId" />
+		<result column="name" property="name" />
+		<result column="mobile" property="mobile" />
+		<result column="address" property="address" />
+		<result column="email" property="email" />
+		
+	</resultMap>
+	
+	<sql id="whereStatement" >
+		<where>
+			<if test="condition != null">
+				<if test="condition.name != null">name LIKE "%"#{condition.name}"%"</if>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" parameterType="pageModel" resultMap="customerResult" >
+		SELECT 
+			customer_id, name, mobile, address, email
+		FROM 
+			customer
+		<include refid="whereStatement"/>
+		LIMIT #{start}, #{pageSize}
+	</select>
+	
+	<select id="count" parameterType="pageModel" resultType="int" >
+		SELECT 
+			COUNT(*)
+		FROM 
+			customer
+		<include refid="whereStatement"/>
+	</select>
+	<select id="delete" parameterType="int">
+		DELETE FROM customer WHERE customer_id = #{cid}
+	</select>
+	
+	<insert id="save" parameterType="customer">
+		INSERT INTO customer (name, mobile, address, email) VALUES(#{name}, #{mobile},#{address},#{email}) 
+	</insert>
+	<insert id="insert"   parameterType="customer" >
+		<selectKey resultType="int" keyProperty="customerId">SELECT LAST_INSERT_ID()</selectKey>
+		INSERT INTO customer (name, mobile, address, email) VALUES(#{name}, #{mobile},#{address},#{email}) 
+	</insert>
+	<select id="update" parameterType="customer">
+		UPDATE customer SET name=#{name}, mobile=#{mobile}, address=#{address}, email=#{email} 
+		WHERE customer_id = #{customerId}
+	</select>
+</mapper>

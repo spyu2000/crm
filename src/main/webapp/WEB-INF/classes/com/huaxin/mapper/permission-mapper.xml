@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.huaxin.mapper.PermissionMapper">
+	
+	<!-- 最后的object的属性  -->
+	<resultMap type="permission" id="permissionResult">
+		<id column="perm_id" property="permId" />
+		<result column="parent_id" property="parentId"/>
+		<result column="perm_name" property="permName" />
+		<result column="perm_url" property="permUrl" />
+	</resultMap>
+	
+	
+	<select id="getAll" resultMap="permissionResult" >
+		SELECT 
+			perm_id, parent_id, perm_name, perm_url
+		FROM 
+			permission
+	</select>
+	
+	<select id="getPermByRole" parameterType="int" resultMap="permissionResult">
+		SELECT 
+			pm.perm_id AS perm_id, parent_id, perm_name, perm_url
+		FROM 
+			permission pm, role_perm rp
+		WHERE 
+			pm.perm_id = rp.perm_id AND rp.role_id = #{roleId}
+	</select>
+	
+	<insert id="insertByRole" >
+		INSERT INTO role_perm (perm_id, role_Id) VALUES(#{permId}, #{roleId})
+	</insert>
+	<delete id="deleteByRole" parameterType="int">
+		DELETE FROM role_perm WHERE role_id = #{roleId}
+	</delete>
+</mapper>

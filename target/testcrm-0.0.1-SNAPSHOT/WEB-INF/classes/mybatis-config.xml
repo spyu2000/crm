@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration  PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+	
+	<typeAliases>
+		<!-- 权限管理  -->
+		<typeAlias type="com.huaxin.bean.UserInfo" alias="userInfo" />
+		<typeAlias type="com.huaxin.bean.RoleInfo" alias="roleInfo" />
+		<typeAlias type="com.huaxin.bean.Permission" alias="permission" />
+		
+		<typeAlias type="com.huaxin.bean.Customer" alias="customer" />
+		<typeAlias type="com.huaxin.pager.PageModel" alias="pageModel" />
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/huaxin/mapper/permission-mapper.xml" />
+		<mapper resource="com/huaxin/mapper/customer-mapper.xml" />
+		<mapper resource="com/huaxin/mapper/userinfo-mapper.xml" />
+		<mapper resource="com/huaxin/mapper/roleinfo-mapper.xml" />
+	</mappers>
+</configuration>

@@ -23,7 +23,7 @@ public class PermissionsMap {
 	public void setPermissionService(PermissionService permissionService) {
 		this.permissionService = permissionService;
 		loadResourceDefine();
-	}
+	} 
 
 	
 	private void loadResourceDefine() {
